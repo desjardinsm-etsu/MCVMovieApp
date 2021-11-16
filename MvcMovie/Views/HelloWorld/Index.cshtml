@@ -1,7 +1,20 @@
 ﻿@{
     ViewData["Title"] = "Movie List";
+
+    var list = (List<string>)ViewData["Names"];
+    int id = 1;
 }
 
 <h2>My Movie List</h2>
 
-<p>Hello from our View Template!</p>
+<p>Hello from our View Template! @ViewData["Title"]</p>
+
+<table>
+    @foreach (var item in list)
+    {
+    <tr>
+        <td>@item</td>
+        <td><a href ="/helloworld/delete?name=@item "><span class="glyphicon glyphicon-trash"></span></a></td>
+</tr>
+    }   
+</table>

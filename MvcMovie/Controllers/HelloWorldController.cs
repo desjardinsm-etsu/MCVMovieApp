@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Text.Encodings.Web;
 
 namespace MvcMovie.Controllers
@@ -8,18 +9,58 @@ namespace MvcMovie.Controllers
         // 
         // GET: /HelloWorld/
 
+        List<string> list = new List<string>();
+
+        
         public IActionResult Index()
+        {
+            ViewData["Names"] = list;
+            return View();
+        }
+
+        public IActionResult Seed()
+        {
+
+            list.Add("Mathew");
+            list.Add("Suzy");
+            list.Add("Ryan");
+            list.Add("Michael");
+            list.Add("Emily");
+            list.Add("Melissa");
+            list.Add("Brad");
+
+            return Redirect("/helloworld");
+        }
+
+
+
+        // GET: /HelloWorld/Welcome/ 
+        // Requires using System.Text.Encodings.Web;
+        public IActionResult Welcome(string name, int id = 1)
+        {
+            //get data from the data base....
+            //
+            // return HtmlEncoder.Default.Encode($"Hello {name}, ID: {id}");
+
+           
+
+
+            return Redirect("/helloworld");
+
+        }
+
+        //GET
+        public IActionResult CreateWelcome()
         {
             return View();
         }
 
-        // GET: /HelloWorld/Welcome/ 
-        // Requires using System.Text.Encodings.Web;
-        public string Welcome(string name, int ID = 1)
+        public IActionResult Delete(string name)
         {
-            //get data from the data base....
+            //do whateever you need to do to delete
+            list.Remove(name);
+            return Redirect("/helloworld");
 
-            return HtmlEncoder.Default.Encode($"Hello {name}, ID: {ID}");
         }
 
         // GET: /HelloWorld/Welcome/ 
