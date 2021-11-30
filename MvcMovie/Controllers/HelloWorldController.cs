@@ -1,16 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVCMovie.Services;
 using System.Text.Encodings.Web;
 
 namespace MvcMovie.Controllers
 {
     public class HelloWorldController : Controller
     {
+        private readonly ISayHello _isay;
+        private readonly SayHello _say;
+
+        public HelloWorldController(ISayHello isay, SayHello say)
+        {
+            _isay = isay;
+            _say = say;
+        }
         // 
         // GET: /HelloWorld/
 
         public IActionResult Index()
         {
-            return View();
+
+            //var sayHello = new MVCMovie.Services.SayHello();
+            return Ok(_say.Number);
         }
 
         // GET: /HelloWorld/Welcome/ 
